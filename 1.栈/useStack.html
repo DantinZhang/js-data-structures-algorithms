@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈的使用</title>
+</head>
+<body>
+    <script type="text/javascript" src="./Stack.js"></script>
+    <script>
+        let stack = new Stack();
+        stack.push('zzy');
+        stack.push(18);
+        stack.push('ht');
+        console.log(stack);
+        stack.pop();
+        console.log(stack.peek()); //18
+        console.log(stack.isEmpty()); //false
+        console.log(stack.size());//2
+        console.log(stack.toString()); //zzy-18
+    </script>
+    
+</body>
+</html>
