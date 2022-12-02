@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>栈的使用</title>
 </head>
+
 <body>
     <script type="text/javascript" src="./Stack.js"></script>
     <script>
@@ -19,7 +21,32 @@
         console.log(stack.isEmpty()); //false
         console.log(stack.size());//2
         console.log(stack.toString()); //zzy-18
+
+
+        //用栈封装一个十进制转二进制的算法
+        //思路：除以2取余，余数依次入栈，然后依次取出栈顶元素
+        function dec2bin(decNumber) {
+            //1.生成一个栈的实例
+            let stack = new Stack();
+            //2.循环取余入栈,不确定循环次数,用while
+            while (decNumber > 0) {
+                // 2.1.获取余数并放入栈中
+                stack.push(decNumber % 2);
+                // 2.2.获取整除后的结果作为下一次运算的数字(floor:向下取整)
+                decNumber = Math.floor(decNumber / 2);
+            }
+            
+            let result = '';
+            while(!stack.isEmpty()) {
+                result += stack.pop();
+            }
+            return result;
+        }
+        console.log(dec2bin(100));
+        console.log(dec2bin(10));
+        console.log(dec2bin(1000));
     </script>
-    
+
 </body>
+
 </html>

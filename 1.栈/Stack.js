@@ -28,6 +28,6 @@ class Stack {
     }
     //6.toString方法转字符串
     toString() {
-        return this.items.join('-');
+        return this.items.join('');
     }
 }
