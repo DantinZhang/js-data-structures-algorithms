@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列结构的封装</title>
+</head>
+
+<body>
+    <script>
+        //队列结构的封装
+        class Queue {
+            constructor() {
+                //属性
+                this.items = [];
+            }
+
+            //方法
+            //1.将元素添加到队列中
+            enqueue(element) {
+                this.items.push(element);
+            }
+
+            //2.从队列中删除前端元素,并返回该元素
+            dequeue() {
+                return this.items.shift();
+            }
+
+            //3.查看前端的元素
+            front() {
+                return this.items[0];
+            }
+            //4.查看队列是否为空
+            isEmpty() {
+                return this.items.length === 0;
+            }
+            //5.查看队列中元素的个数
+            size() {
+                return this.items.length;
+            }
+            //6.toString方法
+            toString() {
+                return this.items.join('');
+            }
+        }
+
+        let queue = new Queue();
+        queue.enqueue('abc');
+        queue.enqueue(6);
+        queue.enqueue(8);
+        console.log(queue);
+        queue.dequeue();  //删除abc
+        console.log(queue);
+        console.log(queue.front());  //6
+        console.log(queue.isEmpty());  //false
+        console.log(queue.size());  //2
+        console.log(queue.toString());  //'68'
+    </script>
+</body>
+
+</html>
