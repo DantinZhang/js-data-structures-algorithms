@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优先级队列</title>
+</head>
+
+<body>
+    <script src="./Queue.js"></script>
+    <script>
+        //优先队列内部的元素类
+        class QueueElement {
+            constructor(element, priority) {
+                this.element = element;
+                this.priority = priority;
+            }
+        }
+
+        //封装优先级队列
+        class PriorityQueue extends Queue {
+            constructor() {
+                super(); //super关键字调用父类的构造函数
+            }
+            //重写enqueue方法
+            enqueue(element, priority) {
+                //1.根据传入的元素，创建一个元素对象实例
+                let queueElement = new QueueElement(element, priority);
+                //2.1判断队列是否为空，如果为空那么直接push进去
+                if (this.isEmpty()) {
+                    this.items.push(queueElement);
+                } else {
+                    //2.2如果不为空，那么比较优先级(这里默认小的优先)
+                    let added = false;  //定义一个标识，判断是否已经插入
+                    for (let i = 0; i < this.items.length; i++) {
+                        //3.如果插入的元素优先级更小，那么就在当前位置插入（其他的被挤到后面）
+                        if (queueElement.priority < this.items[i].priority) {
+                            this.items.splice(i, 0, queueElement);
+                            added = true; //插入完成，修改标识
+                            break; //如果插入完成，就跳出循环
+                        }
+                    }
+                    //4.如果遍历结束后，新元素始终最大，那么就添加到队尾
+                    if(!added) {
+                        this.items.push(queueElement);
+                    }
+                }
+            }
+
+            //其他方法全部继承（转字符串需要小改）
+            dequeue() {
+                return super.dequeue(); //super关键字调用父类的函数
+            }
+
+            front() {
+                return super.front();
+            }
+
+            isEmpty() {
+                return super.isEmpty();
+            }
+
+            size() {
+                return super.size();
+            }
+
+            toString() {
+                let result = "";
+                for(let item of this.items) {
+                    result += `${item.element}-${item.priority} `;
+                }
+                return result;
+            }
+        }
+
+        //测试代码
+        const queue = new PriorityQueue();
+        queue.enqueue('zzy',10);  //参数1为元素，参数2为优先级
+        queue.enqueue('nba',50);
+        queue.enqueue('cba',20);
+        queue.enqueue('dj',40);
+        queue.enqueue('ht',30);
+        console.log(queue.items);
+        console.log(queue.toString()); //zzy-10 cba-20 ht-30 dj-40 nba-50 
+    </script>
+</body>
+
+</html>
