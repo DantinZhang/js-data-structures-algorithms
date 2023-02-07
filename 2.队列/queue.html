@@ -57,6 +57,35 @@
         console.log(queue.isEmpty());  //false
         console.log(queue.size());  //2
         console.log(queue.toString());  //'68'
+        console.log('-----------------------------------------------------------')
+
+
+        //击鼓传花，规定数到几的人淘汰，然后下一个人从1开始数，数到该数字淘汰
+        //求最后剩下的那个人的位置，传入参数（名字列表，数字）
+        function passGame(nameList, num) {
+            //1.定义一个队列,并依次把元素加入队列
+            let queue = new Queue();
+            for(let i = 0; i < nameList.length; i++) {
+                queue.enqueue(nameList[i]);
+            }
+            console.log('初始队列元素：',queue.items);
+            //2.从第一个人开始数数
+            while(queue.size() > 1) {
+                //3.1依次把num之前的数字从队头取出，放到队尾
+                for(let i = 0; i < num - 1; i++) {
+                    queue.enqueue(queue.dequeue());
+                }
+                //3.2删除第一个元素(数到num的人)
+                queue.dequeue();
+                console.log(`人数变化：`,queue.items);
+            }
+            //4.把剩下那个人的名字和位置找出来
+            let leftBoy = queue.front();
+            let index = nameList.indexOf(leftBoy);
+            console.log(`剩下的哥们儿是${leftBoy}，他的初始位置是：${index}`);
+            return index;
+        }
+        passGame(['张三','李四','王五','赵六','田七','郭八'], 6);
     </script>
 </body>
 
