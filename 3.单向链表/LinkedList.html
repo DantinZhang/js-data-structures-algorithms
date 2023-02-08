@@ -65,7 +65,7 @@
                 let newNode = new Node(data);
                 //3.对position的不同情况进行判断
                 //3.1如果插入的位置是第一个（position=0）
-                if(position = 0) {
+                if(position === 0) {
                     newNode.next = this.head; //先保存原来的第一个元素
                     this.head = newNode; //再把新节点给head
                     //注意：上面这两步顺序不能反，不然就找不到原来的第一个元素了
@@ -92,6 +92,7 @@
         list.append('DantinZhang');
         list.append('zzy');
         list.append('元素');
+        list.insert(2,'ht');
         console.log(list.toString());
     </script>
 </body>
