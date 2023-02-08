@@ -55,6 +55,37 @@
 
                 return result;
             }
+
+            //任意位置插入元素
+            insert(position, data) {
+                //1.对position进行越界判断
+                //position==this.length说明是往最后插，如果比它大就不行了
+                if(position < 0 || position > this.length) return false;
+                //2.生成新节点
+                let newNode = new Node(data);
+                //3.对position的不同情况进行判断
+                //3.1如果插入的位置是第一个（position=0）
+                if(position = 0) {
+                    newNode.next = this.head; //先保存原来的第一个元素
+                    this.head = newNode; //再把新节点给head
+                    //注意：上面这两步顺序不能反，不然就找不到原来的第一个元素了
+                }else {
+                    //如果是往其他位置插入元素
+                    let current = this.head;  //拿到第一个元素
+                    let previous = null; //声明变量存储position前边的元素
+                    for(let i = 0; i < position; i++) {
+                        previous = current; //保存上一个位置
+                        current = current.next;  //保存当前位置
+                    }
+                    //循环结束后current已经是position位置的元素
+                    newNode.next = current; //让新节点指向当前位置节点（挤到后边去）
+                    previous.next = newNode; //让前一个节点指向新节点
+                }
+                
+                //4.长度加1
+                this.length++;
+                return true;
+            }
         }
 
         let list = new LinkedList();
