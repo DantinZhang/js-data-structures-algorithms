@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>单向链表</title>
 </head>
+
 <body>
     <script>
         //定义一个节点类，用来声明新的节点
@@ -27,13 +29,13 @@
             append(data) {
                 //1.声明一个新的节点
                 let newNode = new Node(data);
-                if(this.length == 0) {
-                    //2.1如果链表为空，那么head直接指向新节点
+                if (this.length == 0) {
+                    //2.1如果链表为空，那么head直接指向第一个节点
                     this.head = newNode;
-                }else {
+                } else {
                     //2.2如果链表不为空，那么循环遍历，直到指针指向最后一个节点
                     let current = this.head;
-                    while(current.next) {
+                    while (current.next) {
                         current = current.next;
                     }
                     current.next = newNode;
@@ -41,7 +43,26 @@
                 //3.添加完之后length+1
                 this.length++;
             }
+
+            //转字符串的方法
+            toString() {
+                let result = '';
+                let current = this.head;
+                while (current) {
+                    result += current.data + ' '; //如果有就拼接
+                    current = current.next; //指针指向后面的元素
+                }
+
+                return result;
+            }
         }
+
+        let list = new LinkedList();
+        list.append('DantinZhang');
+        list.append('zzy');
+        list.append('元素');
+        console.log(list.toString());
     </script>
 </body>
+
 </html>
