@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单向链表</title>
+</head>
+<body>
+    <script>
+        //定义一个节点类，用来声明新的节点
+        class Node {
+            constructor(data) {
+                this.data = data; //数据
+                this.next = null; //指针
+            }
+        }
+
+        //封装一个单向链表
+        class LinkedList {
+            constructor() {
+                this.head = null;
+                this.length = 0;
+            }
+
+            //将元素插入链表尾部的方法
+            append(data) {
+                //1.声明一个新的节点
+                let newNode = new Node(data);
+                if(this.length == 0) {
+                    //2.1如果链表为空，那么head直接指向新节点
+                    this.head = newNode;
+                }else {
+                    //2.2如果链表不为空，那么循环遍历，直到指针指向最后一个节点
+                    let current = this.head;
+                    while(current.next) {
+                        current = current.next;
+                    }
+                    current.next = newNode;
+                }
+                //3.添加完之后length+1
+                this.length++;
+            }
+        }
+    </script>
+</body>
+</html>
