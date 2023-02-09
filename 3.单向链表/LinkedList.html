@@ -60,20 +60,20 @@
             insert(position, data) {
                 //1.对position进行越界判断
                 //position==this.length说明是往最后插，如果比它大就不行了
-                if(position < 0 || position > this.length) return false;
+                if (position < 0 || position > this.length) return false;
                 //2.生成新节点
                 let newNode = new Node(data);
                 //3.对position的不同情况进行判断
                 //3.1如果插入的位置是第一个（position=0）
-                if(position === 0) {
+                if (position === 0) {
                     newNode.next = this.head; //先保存原来的第一个元素
                     this.head = newNode; //再把新节点给head
                     //注意：上面这两步顺序不能反，不然就找不到原来的第一个元素了
-                }else {
+                } else {
                     //如果是往其他位置插入元素
                     let current = this.head;  //拿到第一个元素
                     let previous = null; //声明变量存储position前边的元素
-                    for(let i = 0; i < position; i++) {
+                    for (let i = 0; i < position; i++) {
                         previous = current; //保存上一个位置
                         current = current.next;  //保存当前位置
                     }
@@ -81,19 +81,39 @@
                     newNode.next = current; //让新节点指向当前位置节点（挤到后边去）
                     previous.next = newNode; //让前一个节点指向新节点
                 }
-                
+
                 //4.长度加1
                 this.length++;
                 return true;
             }
+
+            //获取某个位置的元素
+            get(position) {
+                //1.越界判断,如果获取最后一个位置后面，那么是没有滴，所以是>=length
+                if (position < 0 || position >= this.length) return false;
+                //2.从头往后找，直到找到该位置元素
+                let current = this.head;
+                for (let i = 0; i < position; i++) {
+                    current = current.next;
+                }
+                return current;
+            }
+
+            //根据元素获取该元素位置，若不存在返回-1
+            indexOf() {
+
+            }
+
+            //
         }
 
         let list = new LinkedList();
         list.append('DantinZhang');
         list.append('zzy');
         list.append('元素');
-        list.insert(2,'ht');
+        list.insert(2, 'ht');
         console.log(list.toString());
+        console.log(list.get(2));
     </script>
 </body>
 
