@@ -99,9 +99,22 @@
                 return current;
             }
 
-            //根据元素获取该元素位置，若不存在返回-1
-            indexOf() {
-
+            //根据元素数据获取该元素位置，若不存在返回-1
+            indexOf(data) {
+                let current = this.head;
+                let index = 0; //定义一个索引
+                //从头开始一个一个对比，如果相等了就返回index的值
+                while(current) {
+                    if(current.data == data) {
+                        return index;
+                    }else {
+                        //当前节点不是我要找到节点，那么就往后指
+                        current = current.next;
+                        index++;
+                    }
+                }
+                //如果所有都对比完了都没找到，说明没有，就返回-1
+                return -1;
             }
 
             //
