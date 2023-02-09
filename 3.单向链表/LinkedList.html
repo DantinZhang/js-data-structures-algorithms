@@ -157,8 +157,11 @@
             }
 
             //删除指定data所在的节点
-            remove() {
-                
+            remove(data) {
+                //1.先找到data所在的位置
+                let index = this.indexOf(data);
+                //2.删除该位置的元素
+                return this.removeAt(index);
             }
         }
 
@@ -181,6 +184,10 @@
         //6.测试删除指定位置元素
         list.removeAt(2);
         console.log(list.toString()); //DantinZhang zzy 元素 
+        //7.测试删除指定data的元素
+        list.remove('元素');
+        console.log(list.toString()); //DantinZhang zzy
+        list
     </script>
 </body>
 
