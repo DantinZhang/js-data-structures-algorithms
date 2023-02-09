@@ -131,6 +131,35 @@
                 current.data = data;
                 return current;
             }
+
+            //删除指定位置的节点
+            removeAt(position) {
+                //1.越界判断
+                if(position < 0 || position >= this.length) return false;
+                let current = this.head;
+                //2.1如果删除的是第一个节点,前边没东西，只有head
+                if(position == 0) {
+                    this.head = current.next;
+                }else {
+                    //2.2如果删除的是其他位置的节点
+                    let index = 0;
+                    let previous = null;
+                    //2.2.1先找到前边的节点，删除节点，后边的节点
+                    while(index++ < position) {
+                        previous = current;
+                        current = current.next;
+                    }
+                    //2.2.2将前边的节点指向后边的节点
+                    previous.next = current.next;
+                }
+                //3.返回被删除的元素
+                return current;
+            }
+
+            //删除指定data所在的节点
+            remove() {
+                
+            }
         }
 
         let list = new LinkedList();
@@ -148,8 +177,10 @@
         console.log(list.get(2)); //Node {data: 'ht', next: Node}
         //5.测试修改元素
         list.update(2, '修改元素');  
-        console.log(list.toString()); //DantinZhang zzy 修改元素 元素 
-        
+        console.log(list.toString()); //DantinZhang zzy 修改元素 元素
+        //6.测试删除指定位置元素
+        list.removeAt(2);
+        console.log(list.toString()); //DantinZhang zzy 元素 
     </script>
 </body>
 
