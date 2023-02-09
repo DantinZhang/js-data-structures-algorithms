@@ -152,7 +152,9 @@
                     //2.2.2将前边的节点指向后边的节点
                     previous.next = current.next;
                 }
-                //3.返回被删除的元素
+                //3.长度-1
+                this.length--;
+                //4.返回被删除的元素
                 return current;
             }
 
@@ -197,9 +199,9 @@
         //7.测试删除指定data的元素
         list.remove('元素');
         console.log(list.toString()); //DantinZhang zzy
-        //8.测试是否为空和链表长度
+        //8.测试是否为空和输出长度
         console.log(list.isEmpty()); //false
-        console.log(list.size()); //4
+        console.log(list.size()); //2
     </script>
 </body>
 
