@@ -163,6 +163,16 @@
                 //2.删除该位置的元素
                 return this.removeAt(index);
             }
+
+            //判断链表是否为空
+            isEmpty() {
+                return this.length == 0;
+            }
+
+            //判断链表的长度
+            size() {
+                return this.length;
+            }
         }
 
         let list = new LinkedList();
@@ -187,7 +197,9 @@
         //7.测试删除指定data的元素
         list.remove('元素');
         console.log(list.toString()); //DantinZhang zzy
-        list
+        //8.测试是否为空和链表长度
+        console.log(list.isEmpty()); //false
+        console.log(list.size()); //4
     </script>
 </body>
 
