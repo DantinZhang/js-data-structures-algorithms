@@ -117,16 +117,39 @@
                 return -1;
             }
 
-            //
+            //更新某个位置的元素值
+            update(position, data) {
+                //1.越界判断,positon==length是刚好在最后一个元素的后面那个空位
+                if(position < 0 || position >= this.length ) return false;
+                //2.拿到这个位置节点
+                let current = this.head;
+                let index = 0;
+                while(index++ < position) {
+                    current = current.next;
+                }
+                //3.修改当前节点的元素值
+                current.data = data;
+                return current;
+            }
         }
 
         let list = new LinkedList();
+        //1.测试尾部插入
         list.append('DantinZhang');
         list.append('zzy');
         list.append('元素');
+        console.log(list.toString()); //DantinZhang zzy 元素
+        //2.测试任意位置插入
         list.insert(2, 'ht');
-        console.log(list.toString());
-        console.log(list.get(2));
+        console.log(list.toString()); //DantinZhang zzy ht 元素
+        //3.测试获取某个元素索引
+        console.log(list.indexOf('zzy')); //1
+        //4.测试获取某个位置元素 
+        console.log(list.get(2)); //Node {data: 'ht', next: Node}
+        //5.测试修改元素
+        list.update(2, '修改元素');  
+        console.log(list.toString()); //DantinZhang zzy 修改元素 元素 
+        
     </script>
 </body>
 
