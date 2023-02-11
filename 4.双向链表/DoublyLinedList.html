@@ -26,12 +26,12 @@
                 this.length = 0;
             }
 
-            //1.链表数据转换为字符串的两种遍历（顺序、逆序）
+            //链表数据转换为字符串的两种遍历（顺序、逆序）
             toString() {
                 return this.forwardString();
             }
 
-            //2.顺序遍历转字符串
+            //顺序遍历转字符串
             forwardString() {
                 let result = '';
                 let current = this.head;
@@ -42,7 +42,7 @@
                 return result;
             }
 
-            //3.逆序遍历转字符串
+            //逆序遍历转字符串
             backwardString() {
                 let result = '';
                 let current = this.tail;
@@ -53,7 +53,7 @@
                 return result;
             }
 
-            //4.向尾部插入节点
+            //向尾部插入节点
             append(data) {
                 //1.先生成一个节点
                 const newNode = new Node(data);
@@ -66,19 +66,65 @@
                     newNode.pre = this.tail; //先让新节点pre指向之前的尾部节点
                     this.tail.next = newNode; //之前尾部节点next指向新节点
                     this.tail = newNode; //tail指向新节点
-                    console.log('最后一个节点指向', newNode.next); //最后一个指向null
                 }
                 //4.长度加一
                 this.length++;
             }
 
+            //向任意位置插入节点
+            insert(position, data) {
+                let newNode = new Node(data);
+                //1.越界判断，其中length位置是最后一个节点的后面那个空位
+                if (position < 0 || position > this.length) return false;
+                //2.1如果链表为空
+                if (this.length == 0) {
+                    this.head = newNode;
+                    this.tail = newNode;
+                } else {
+                    //2.2如果链表不为空
+                    //2.2.1如果位置是1
+                    if (position == 0) {
+                        // this.head此时指的是第一个节点
+                        this.head.pre = newNode;
+                        newNode.next = this.head;
+                        this.head = newNode;
+                    }
+                    //2.2.2.如果在最后一个节点的后面插入
+                    else if (position == this.length) {
+                        // this.tail此时指的是最后一个节点
+                        newNode.pre = this.tail;
+                        this.tail.next = newNode;
+                        this.tail = newNode;
+                    }
+                    //2.2.3.如果在其他位置插入
+                    else {
+                        //先找到这个位置
+                        let index = 0;
+                        let current = this.head;
+                        let previous = null;
+                        while (index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        //插入新节点，到它们俩中间儿
+                        previous.next = newNode;
+                        newNode.pre = previous;
+                        newNode.next = current;
+                        current.pre = newNode;
+                    }
+                }
+                //3.长度别忘了+1
+                this.length++;
+                return true;
+            }
         }
 
         const list = new DoublyLinedList();
         list.append('DantinZhang');
         list.append('努力的但丁');
         list.append('zzy');
-        console.log(list.toString());
+        list.insert(2, 'ht');
+        list.insert(0, '第一个元素');
         console.log(list.forwardString());
         console.log(list.backwardString());
     </script>
