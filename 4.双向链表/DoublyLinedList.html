@@ -154,6 +154,30 @@
                 }
                 return -1
             }
+
+            //更新某个元素
+            update(position, data) {
+                //1.生成节点
+                let newNode = new Node(data);
+                //2.越界判断
+                if(position < 0 || position >= this.length) return false;
+                //3.寻找位置，改变元素值，二分查找
+                let current = null;
+                if(position < this.length / 2) {
+                    current = this.head;
+                    let index = 0;
+                    while(index++ < position) {
+                        current = current.next;
+                    }
+                }else {
+                    current = this.tail;
+                    for(let i = this.length-1; i > position; i--) {
+                       current = current.pre; 
+                    }
+                }
+                current.data = data;
+                return current.data;
+            }
         }
 
         const list = new DoublyLinedList();
@@ -161,11 +185,15 @@
         list.append('努力的但丁');
         list.append('zzy');
         list.append('ht');
-        list.insert(2, '第三个位置插入本元素');
-        console.log(list.forwardString());
+        list.insert(2, 'No.3');
+        console.log(list.forwardString());//DantinZhang 努力的但丁 No.3 zzy ht
         console.log(list.backwardString());
         console.log(list.get(2)); //第三个位置插入本元素
         console.log(list.get(3)); //zzy
+        console.log(list.indexOf('zzy'));//3
+        //测试更新
+        list.update(2,'DJ');
+        console.log(list.toString());
     </script>
 </body>
 
