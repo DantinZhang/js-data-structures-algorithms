@@ -117,16 +117,40 @@
                 this.length++;
                 return true;
             }
+
+            //获取某个位置的元素值
+            get(position) {
+                //1.越界判断
+                if (position < 0 || position >= this.length) return false;
+                //2.1如果该元素在前半部分,从head开始找
+                if (position < this.length / 2) {
+                    let current = this.head;
+                    for(let i = 0; i < position; i++) {
+                        current = current.next;
+                    }
+                    return current.data;
+                } else {
+                    //2.2如果该元素在后半部分,从tail倒着找
+                    let current = this.tail;
+                    let index = this.length - 1;
+                    while(index-- > position) {
+                        current = current.pre;
+                    }
+                    return current.data;
+                }
+            }
         }
 
         const list = new DoublyLinedList();
         list.append('DantinZhang');
         list.append('努力的但丁');
         list.append('zzy');
-        list.insert(2, 'ht');
-        list.insert(0, '第一个元素');
+        list.append('ht');
+        list.insert(2, '第三个位置插入本元素');
         console.log(list.forwardString());
         console.log(list.backwardString());
+        console.log(list.get(2)); //第三个位置插入本元素
+        console.log(list.get(3)); //zzy
     </script>
 </body>
 
