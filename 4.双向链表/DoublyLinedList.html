@@ -24,13 +24,29 @@
             }
 
             //向尾部插入节点
-            append() {
-                
+            append(data) {
+                //1.先生成一个节点
+                const newNode = new Node(data);
+                //2.添加的是第一个节点，只需要让head和tail都指向新节点
+                if(this.length == 0) {
+                    this.head = newNode;
+                    this.tail = newNode;
+                } else {
+                    //3.添加的不是第一个节点,直接找到尾部(不用遍历)
+                    newNode.pre = this.tail; //先让新节点pre指向之前的尾部节点
+                    this.tail.next = newNode; //之前尾部节点next指向新节点
+                    this.tail = newNode; //tail指向新节点
+                    console.log(newNode.next); //最后一个指向null
+                }
+                //4.长度加一
+                this.length++;
             }
         }
 
         const list = new DoublyLinedList();
         list.append('DantinZhang');
+        list.append('努力的但丁');
+        console.log(list);
     </script>
 </body>
 </html>
