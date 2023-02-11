@@ -139,6 +139,21 @@
                     return current.data;
                 }
             }
+
+            //根据元素值获取节点位置
+            indexOf(data) {
+                let current = this.head;
+                let index = 0;
+                while(current) {
+                    if(current.data == data) {
+                        return index;
+                    }else {
+                        current = current.next;
+                        index++;
+                    }
+                }
+                return -1
+            }
         }
 
         const list = new DoublyLinedList();
