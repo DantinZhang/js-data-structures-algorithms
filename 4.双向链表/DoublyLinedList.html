@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>封装双向链表</title>
 </head>
+
 <body>
     <script>
+        //生成节点的类
         class Node {
             constructor(data) {
                 this.pre = null;
@@ -15,7 +18,7 @@
                 this.next = null;
             }
         }
-
+        //封装一个双向链表
         class DoublyLinedList {
             constructor() {
                 this.head = null;
@@ -23,12 +26,39 @@
                 this.length = 0;
             }
 
-            //向尾部插入节点
+            //1.链表数据转换为字符串的两种遍历（顺序、逆序）
+            toString() {
+                return this.forwardString();
+            }
+
+            //2.顺序遍历转字符串
+            forwardString() {
+                let result = '';
+                let current = this.head;
+                while (current) {
+                    result += current.data + ' ';
+                    current = current.next;
+                }
+                return result;
+            }
+
+            //3.逆序遍历转字符串
+            backwardString() {
+                let result = '';
+                let current = this.tail;
+                for (let i = 0; i < this.length; i++) {
+                    result += current.data + ' ';
+                    current = current.pre;
+                }
+                return result;
+            }
+
+            //4.向尾部插入节点
             append(data) {
                 //1.先生成一个节点
                 const newNode = new Node(data);
                 //2.添加的是第一个节点，只需要让head和tail都指向新节点
-                if(this.length == 0) {
+                if (this.length == 0) {
                     this.head = newNode;
                     this.tail = newNode;
                 } else {
@@ -36,17 +66,22 @@
                     newNode.pre = this.tail; //先让新节点pre指向之前的尾部节点
                     this.tail.next = newNode; //之前尾部节点next指向新节点
                     this.tail = newNode; //tail指向新节点
-                    console.log(newNode.next); //最后一个指向null
+                    console.log('最后一个节点指向', newNode.next); //最后一个指向null
                 }
                 //4.长度加一
                 this.length++;
             }
+
         }
 
         const list = new DoublyLinedList();
         list.append('DantinZhang');
         list.append('努力的但丁');
-        console.log(list);
+        list.append('zzy');
+        console.log(list.toString());
+        console.log(list.forwardString());
+        console.log(list.backwardString());
     </script>
 </body>
+
 </html>
