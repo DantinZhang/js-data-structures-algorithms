@@ -178,6 +178,47 @@
                 current.data = data;
                 return current.data;
             }
+
+            //删除某个位置的元素
+            removeAt(position) {
+                //1.越界判断
+                if(position < 0 || position >= this.length) return false;
+                let current = this.head; //定义在最上面方便各种情况返回数据
+                //2.判断是否只有一个节点
+                if(this.length == 1) {
+                    //2.1如果只有一个节点，那么删除时head和tail都为空
+                    this.head = null;
+                    this.tail = null;
+                }else {
+                    //2.2如果有多个节点，那么就要进行位置判断
+                    //2.2.1删除第一个节点
+                    if(position == 0) {
+                        //删除前head指向的是第一个节点
+                        this.head.next.pre = null; //所有指向它的指针都清掉
+                        this.head = this.head.next;
+                    }
+                    //2.2.2删除最后一个节点
+                    else if(position == this.length-1) {
+                        //删除前tail指向的是最后一个节点
+                        current = this.tail;
+                        this.tail.pre.next = null; //所有指向它的指针都清掉
+                        this.tail = this.tail.pre;
+                    }
+                    //2.2.3删除其他的节点
+                    else {
+                        //先找到位置
+                        let index = 0;
+                        while(index++ < position) {
+                            current = current.next;
+                        }
+                        current.pre.next = current.next;
+                        current.next.pre = current.pre;
+                    }
+                }
+                //3.删除完-1
+                this.length -= 1;
+                return current.data;
+            }
         }
 
         const list = new DoublyLinedList();
@@ -193,7 +234,10 @@
         console.log(list.indexOf('zzy'));//3
         //测试更新
         list.update(2,'DJ');
-        console.log(list.toString());
+        console.log(list.toString()); //DantinZhang 努力的但丁 DJ zzy ht 
+        list.removeAt(2);
+        //测试删除
+        console.log(list.toString()); //DantinZhang 努力的但丁 zzy ht 
     </script>
 </body>
 
