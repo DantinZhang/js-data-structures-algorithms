@@ -81,6 +81,7 @@
                 //2.拿集合1中的元素和集合2中元素相比较
                 let values1 = this.getValues();
                 values1.forEach(el => {
+                    //集合1有集合2也有的收起来
                     if(otherSet.has(el)) {
                         intersectionSet.add(el);
                     }
@@ -88,13 +89,43 @@
                 //3.返回交集集合
                 return intersectionSet;
             }
+
+            //差集,刚好和交集相反
+            difference(otherSet) {
+                //1.定义一个差集集合
+                let diffSet = new Set();
+                //2.集合1中的元素去集合2中查找
+                let values1 = this.getValues();
+                values1.forEach(el => {
+                    //集合1有集合2没有的收起来
+                    if(!otherSet.has(el)) {
+                        diffSet.add(el);
+                    }
+                })
+                //3.返回结果
+                return diffSet;
+            }
+
+            //子集的判断
+            isSubset(otherSet) {
+                //判断集合1是否是集合2的子集
+                let values = this.getValues();
+                //forEach的坑：return无法终止循环，无法跳出函数
+                // values.forEach(el => {
+                //     if(!otherSet.has(el)) return false;
+                // }) 
+                for(let i = 0; i < values.length; i++) {
+                    if(!otherSet.has(values[i])) return false;
+                }
+                return true;
+            }
         }
 
         let set = new Set();
         set.add('zzy');
         set.add('努力的但丁');
         set.add('DantinZhang');
-        console.log(set.getValues());
+        console.log(set.getValues()); //['zzy', '努力的但丁', 'DantinZhang']
         // set.remove('zzy');
         // console.log(set.items);
         // set.clear();
@@ -105,15 +136,29 @@
         newSet.add('元素1');
         newSet.add('元素2');
         newSet.add('努力的但丁');
-        console.log(newSet.getValues());
+        console.log(newSet.getValues()); //['元素1', '元素2', '努力的但丁']
 
         //并集
         let union = set.union(newSet);
-        console.log(union.getValues());
+        console.log(union.getValues()); //['zzy', '努力的但丁', 'DantinZhang', '元素1', '元素2']
 
         //交集
         let intersection = set.intersection(newSet);
-        console.log(intersection.getValues());
+        console.log(intersection.getValues()); //['努力的但丁']
+
+        //差集
+        let difference = set.difference(newSet);
+        console.log(difference.getValues()); //['zzy', 'DantinZhang']
+    
+        //子集的判断
+        let subset = new Set();
+        subset.add('zzy');
+        subset.add('努力的但丁');
+        subset.add('DantinZhang');
+        subset.add('ht');
+        console.log(subset.getValues());
+        let isSubset = set.isSubset(subset);
+        console.log(isSubset);
     </script>
 </body>
 </html>
