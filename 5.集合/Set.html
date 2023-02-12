@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装一个集合</title>
+</head>
+<body>
+    <script>
+        class Set {
+            constructor() {
+                //集合使用对象存储，因为元素不能重复（对象中属性不能重复）
+                this.items = {};
+            }
+
+            //向集合添加一个新的项
+            add(value) {
+                //先判断有没有这个属性，有的话就不添加
+                if(this.has(value)) return false;
+                //使用[]的方式添加属性，这样属性名就和value一样
+                this.items[value] = value;
+                return true;
+            }
+
+            //检测集合(对象)中是否有这个属性
+            has(value) {
+                return this.items.hasOwnProperty(value);
+            }
+
+            //删除某个元素
+            remove(value) {
+                if(!this.has(value)) return false;
+                delete this.items[value];
+            }
+
+            //移除集合中所有项
+            clear() {
+                this.items = {};
+            }
+
+            //返回集合的长度
+            size() {
+                return Object.keys(this.items).length;
+            }
+
+            //获取集合中所有的值
+            getValues() {
+                return Object.values(this.items);
+            }
+        }
+
+        let set = new Set();
+        set.add('zzy');
+        set.add('努力的但丁');
+        set.add('DantinZhang');
+        console.log(set.items);
+        set.remove('zzy');
+        console.log(set.items);
+        set.clear();
+        console.log(set.items);
+    </script>
+</body>
+</html>
