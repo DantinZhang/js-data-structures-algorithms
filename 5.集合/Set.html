@@ -73,6 +73,21 @@
                 //4.返回合并之后的结果
                 return unionSet;
             }
+
+            //交集
+            intersection(otherSet) {
+                //1.定义一个交集集合
+                let intersectionSet = new Set();
+                //2.拿集合1中的元素和集合2中元素相比较
+                let values1 = this.getValues();
+                values1.forEach(el => {
+                    if(otherSet.has(el)) {
+                        intersectionSet.add(el);
+                    }
+                })
+                //3.返回交集集合
+                return intersectionSet;
+            }
         }
 
         let set = new Set();
@@ -95,6 +110,10 @@
         //并集
         let union = set.union(newSet);
         console.log(union.getValues());
+
+        //交集
+        let intersection = set.intersection(newSet);
+        console.log(intersection.getValues());
     </script>
 </body>
 </html>
