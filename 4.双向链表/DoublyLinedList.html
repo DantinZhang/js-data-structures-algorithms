@@ -219,6 +219,31 @@
                 this.length -= 1;
                 return current.data;
             }
+            
+            //删除某个元素
+            remove(data) {
+                return this.removeAt(this.indexOf(data));
+            }
+
+            //测试是否为空
+            isEmpty() {
+                return this.length == 0;
+            }
+
+            //输出长度
+            size() {
+                return this.length;
+            }
+
+            //获取链表第一个元素值
+            getHead() {
+                return this.head.data;
+            }
+
+            //获取链表最后一个元素值
+            getTail() {
+                return this.tail.data;
+            }
         }
 
         const list = new DoublyLinedList();
@@ -235,9 +260,10 @@
         //测试更新
         list.update(2,'DJ');
         console.log(list.toString()); //DantinZhang 努力的但丁 DJ zzy ht 
-        list.removeAt(2);
         //测试删除
-        console.log(list.toString()); //DantinZhang 努力的但丁 zzy ht 
+        list.removeAt(2);
+        list.remove('努力的但丁');
+        console.log(list.toString()); //DantinZhang zzy ht 
     </script>
 </body>
 
