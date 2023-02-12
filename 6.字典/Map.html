@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字典的封装</title>
+</head>
+<body>
+    <script>
+        //字典和集合差不多，都可以基于对象封装
+        class Map {
+            constructor() {
+                this.items = {};
+            }
+
+            add(key, value) {
+                if(this.has(key)) return false;
+                this.items[key] = value;
+            }
+
+            has(key) {
+                return this.items.hasOwnProperty(key);
+            }
+
+            remove(key) {
+                if(!this.has(key)) return false;
+                delete this.items[key];
+            }
+
+            get(key) {
+                if(!this.has(key)) return undefined;
+                return this.items[key]
+            }
+
+            keys() {
+                return Object.keys(this.items);
+            }
+
+            size() {
+                return this.keys.length;
+            }
+
+            clear() {
+                this.items = {};
+            }
+        }
+    </script>
+</body>
+</html>
