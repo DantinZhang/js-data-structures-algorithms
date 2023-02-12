@@ -48,17 +48,53 @@
             getValues() {
                 return Object.values(this.items);
             }
+
+            //--------------------------------------------
+            //集合的相关操作
+            //并集
+            union(otherSet) {
+                //集合对象1：this
+                //集合对象2：otherSet
+                //1.创建一个新的集合
+                let unionSet = new Set();
+                //2.先把集合对象1中的元素全部放到新集合中
+                let values = this.getValues();
+                values.forEach(el => {
+                    unionSet.add(el);
+                })
+                //3.遍历集合对象2，判断其中的元素在新集合中有没有
+                values = otherSet.getValues();
+                for(let i = 0; i < values.length; i++) {
+                    //这里其实不写判断也可以，因为add方法做了判断
+                    if(!unionSet.has(values[i])) {
+                        unionSet.add(values[i]);
+                    }
+                }
+                //4.返回合并之后的结果
+                return unionSet;
+            }
         }
 
         let set = new Set();
         set.add('zzy');
         set.add('努力的但丁');
         set.add('DantinZhang');
-        console.log(set.items);
-        set.remove('zzy');
-        console.log(set.items);
-        set.clear();
-        console.log(set.items);
+        console.log(set.getValues());
+        // set.remove('zzy');
+        // console.log(set.items);
+        // set.clear();
+        // console.log(set.items);
+
+        //测试集合的各种操作
+        let newSet = new Set();
+        newSet.add('元素1');
+        newSet.add('元素2');
+        newSet.add('努力的但丁');
+        console.log(newSet.getValues());
+
+        //并集
+        let union = set.union(newSet);
+        console.log(union.getValues());
     </script>
 </body>
 </html>
