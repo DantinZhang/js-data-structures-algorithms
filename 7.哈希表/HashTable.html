@@ -14,7 +14,7 @@
         function hashFun(str, size) {
             //1.定义hashCode变量
             let hashCode = 0;
-            //2.霍纳算法，计算hashCode的值
+            //2.霍纳算法O(N)，计算hashCode的值
             // cats => 获取Unicode编码
             for(let i = 0; i < str.length; i++) {
                 //这里的理论比较不好理解，代码先记住吧。
@@ -26,12 +26,16 @@
             return index;
         }
         //封装哈希表
-        class HashList {
+        class HashTable {
             constructor() {
-
+                //1.定义一个数组来存储元素
+                this.storage = [];
+                //2.count:已经存储的总长度，用来计算装载因子
+                //装载因子（已经存储的/数组总长）用来判断是否扩容
+                this.count = 0;
+                //3.数组的长度
+                this.limit = 7;
             }
-
-            
         }
     </script>
 </body>
