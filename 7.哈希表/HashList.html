@@ -8,6 +8,24 @@
 </head>
 <body>
     <script>
+        //设计哈希函数
+        //1>将字符串转换成比较大的数字：hashCode
+        //2>把hashCode压缩到数组范围(size)内
+        function hashFun(str, size) {
+            //1.定义hashCode变量
+            let hashCode = 0;
+            //2.霍纳算法，计算hashCode的值
+            // cats => 获取Unicode编码
+            for(let i = 0; i < str.length; i++) {
+                //这里的理论比较不好理解，代码先记住吧。
+                hashCode = 37 * hashCode + str.charCodeAt(i);
+            }
+            //3.取余数
+            let index = hashCode % size;
+            //4.返回位置索引
+            return index;
+        }
+        //封装哈希表
         class HashList {
             constructor() {
 
