@@ -1,30 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>哈希表的封装</title>
 </head>
+
 <body>
     <script>
-        //设计哈希函数
-        //1>将字符串转换成比较大的数字：hashCode
-        //2>把hashCode压缩到数组范围(size)内
-        function hashFun(str, size) {
-            //1.定义hashCode变量
-            let hashCode = 0;
-            //2.霍纳算法O(N)，计算hashCode的值
-            // cats => 获取Unicode编码
-            for(let i = 0; i < str.length; i++) {
-                //这里的理论比较不好理解，代码先记住吧。
-                hashCode = 37 * hashCode + str.charCodeAt(i);
-            }
-            //3.取余数
-            let index = hashCode % size;
-            //4.返回位置索引
-            return index;
-        }
         //封装哈希表
         class HashTable {
             constructor() {
@@ -36,7 +21,26 @@
                 //3.数组的长度
                 this.limit = 7;
             }
+
+            //设计哈希函数
+            //1>将字符串转换成比较大的数字：hashCode
+            //2>把hashCode压缩到数组范围(size)内
+            hashFun(str, size) {
+                //1.定义hashCode变量
+                let hashCode = 0;
+                //2.霍纳算法O(N)，计算hashCode的值
+                // cats => 获取Unicode编码
+                for (let i = 0; i < str.length; i++) {
+                    //这里的理论比较不好理解，代码先记住吧。
+                    hashCode = 37 * hashCode + str.charCodeAt(i);
+                }
+                //3.取余数
+                let index = hashCode % size;
+                //4.返回位置索引
+                return index;
+            }
         }
     </script>
 </body>
+
 </html>
