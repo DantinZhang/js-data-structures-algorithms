@@ -64,6 +64,10 @@
                 bucket.push([key, value]);
                 //5.装载因子增加
                 this.count++;
+                //6.判断是否需要扩容
+                if(this.count > this.limit * 0.75) {
+                    this.resize(this.limit * 2);
+                }
                 return true;
             }
 
@@ -100,6 +104,10 @@
                     let tuple = bucket[i];
                     if(tuple[0] == key) {
                         bucket.splice(i,1);
+                        this.count --; //别忘了插入个数-1
+                        if(this.limit > 7 && this.count < this.limit * 0.25) {
+                            this.resize(Math.floor(this.limit / 2));
+                        }
                         return tuple[1];
                     }
                 }
