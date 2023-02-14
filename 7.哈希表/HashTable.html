@@ -86,14 +86,38 @@
                 //6.如果遍历完没有return，说明没找到
                 return null;
             }
+
+            //删除某个key对应的元组
+            remove(key) {
+                //1.先找到位置
+                let index = this.hashFun(key, this.limit);
+                //2.找到该位置对应的桶
+                let bucket = this.storage[index];
+                //3.如果桶是空的，那么直接返回true
+                if(bucket == undefined) return null;
+                //4.如果桶不为空，就遍历寻找key所对应的元组
+                for(let i = 0; i < bucket.length; i++) {
+                    let tuple = bucket[i];
+                    if(tuple[0] == key) {
+                        bucket.splice(i,1);
+                        return tuple[1];
+                    }
+                }
+                //5.如果走到这里，说明没有这个元素
+                return null;
+            }
         }
 
         let hashTable = new HashTable();
-        hashTable.put('name', 'zzy');
-        hashTable.put('age', 18);
-        console.log(hashTable.storage);
+        hashTable.put('name', 'zzy');//位置5
+        hashTable.put('age', 18); //位置2
+        console.log(hashTable.storage);//结果：[null, null, [['age',18]], null, null, [['name','zzy']], null]
+        //测试获取元素
         console.log(hashTable.get('age')); //18
         console.log(hashTable.get('www')); //null
+        //测试删除
+        console.log(hashTable.remove('age'));//18
+        console.log(hashTable.storage);//[null,[],null,null,null,[['name','zzy']],null]
     </script>
 </body>
 
