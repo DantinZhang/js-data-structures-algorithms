@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>判断一个数是否为质数</title>
+</head>
+
+<body>
+    <script>
+        //判断一个数是否为质数
+        function isPrime(num) {
+            if(num <= 1) return false;
+            for (let i = 2; i < num; i++) {
+                if (num % i == 0) return false;
+            }
+            return true;
+        }
+
+        console.log(isPrime(11));
+
+        //判断一个数是否为质数更高效的方法
+        function isPrimeNb(num) {
+            if(num <= 1) return false;
+            let sqrtNum = Math.sqrt(num);
+            for (let i = 2; i < sqrtNum; i++) {
+                if (num % i == 0) return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>
