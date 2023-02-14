@@ -71,7 +71,7 @@
             get(key) {
                 //1.先找到位置
                 let index = this.hashFun(key, this.limit);
-                //2.找到该位置的桶
+                //2.找到位置的桶
                 let bucket = this.storage[index];
                 //3.判断桶是否为空，为空说明肯定没有key
                 if(bucket == undefined) return null;
@@ -105,6 +105,30 @@
                 }
                 //5.如果走到这里，说明没有这个元素
                 return null;
+            }
+
+            //哈希表的扩容，传入新的数组长度
+            resize(newLimit) {
+                //1.定义一个变量存储旧数组
+                let oldStorage = this.storage;
+                //2.初始化数组长度
+                this.storage = [];
+                this.count = 0;
+                this.limit = newLimit;
+                //3.把旧数组中存放的东西依次拿出来添加到新数组
+                for(let i = 0; i < oldStorage.length; i++) {
+                    let bucket = oldStorage[i];
+                    //如果当前桶里没东西，就继续下一轮循环
+                    if(bucket == undefined) continue;
+                    //如果桶里有东西，就遍历它
+                    for(let i = 0; i < bucket.length; i++) {
+                        //调用put方法依次把元组放进新的数组中
+                        //注意put方法接收两个参数(key,value)
+                        let tuple = bucket[i];
+                        this.put(tuple[0],tuple[1]);
+                    }
+                }
+                //4.直到所有的桶里的元素都迁移完毕，那么扩容就欧了
             }
         }
 
