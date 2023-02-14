@@ -66,7 +66,8 @@
                 this.count++;
                 //6.判断是否需要扩容
                 if(this.count > this.limit * 0.75) {
-                    this.resize(this.limit * 2);
+                    let newLimit = this.getPrime(this.limit * 2);
+                    this.resize(newLimit);
                 }
                 return true;
             }
@@ -106,7 +107,9 @@
                         bucket.splice(i,1);
                         this.count --; //别忘了插入个数-1
                         if(this.limit > 7 && this.count < this.limit * 0.25) {
-                            this.resize(Math.floor(this.limit / 2));
+                            let newLimit = Math.floor(this.limit / 2);
+                            let newPrimeLimit = this.getPrime(newLimit);
+                            this.resize(newPrimeLimit);
                         }
                         return tuple[1];
                     }
@@ -138,6 +141,24 @@
                 }
                 //4.直到所有的桶里的元素都迁移完毕，那么扩容就欧了
             }
+
+            //判断一个数是否为质数
+            isPrime(num) {
+                if(num <= 1) return false;
+                let sqrtNum = Math.sqrt(num);
+                for (let i = 2; i < sqrtNum; i++) {
+                    if (num % i == 0) return false;
+                }
+                return true;
+            }
+
+            //把当前数变成质数
+            getPrime(num) {
+                while(!this.isPrime(num)) {
+                    num++;
+                }
+                return num;
+            }
         }
 
         let hashTable = new HashTable();
@@ -150,7 +171,18 @@
         //测试删除
         console.log(hashTable.remove('age'));//18
         console.log(hashTable.storage);//[null,[],null,null,null,[['name','zzy']],null]
-    </script>
+        hashTable.put('class1','Tom')
+        hashTable.put('class2','Mary')
+        hashTable.put('class3','Gogo')
+        hashTable.put('class4','Tony')
+        hashTable.put('class5','5')
+        hashTable.put('class6','6')
+        hashTable.put('class7','7')
+        hashTable.put('class8','8')
+        hashTable.put('class9','9')
+        hashTable.put('class10','10')
+        console.log(hashTable.limit); //17
+   </script>
 </body>
 
 </html>
