@@ -10,7 +10,7 @@
 
 <body>
     <script>
-        //封装哈希表
+        //封装哈希表(基于链地址法解决冲突情况)
         class HashTable {
             constructor() {
                 //1.定义一个数组来存储元素
@@ -39,7 +39,39 @@
                 //4.返回位置索引
                 return index;
             }
+
+            //插入/修改方法
+            put(key, value) {
+                //1.获取位置
+                let index = this.hashFun(key, this.limit);
+                let bucket = this.storage[index];
+                console.log('当前桶：', index, bucket);
+                //2.判断插入的位置是否已经创建数组（桶）
+                if (bucket == undefined) {
+                    bucket = []; //创建桶然后放到索引位置
+                    this.storage[index] = bucket;
+                }
+                //3.如果已经有了桶，那么就遍历看是否已经添加
+                for (let i = 0; i < bucket.length; i++) {
+                    let tuple = bucket[i];
+                    if (tuple[0] == key) {
+                        //3.1如果添加了，就修改value
+                        tuple[1] = value;
+                        return true;
+                    }
+                }
+                //4.循环结束如果没有返回，那么就要新增
+                bucket.push([key, value]);
+                //5.装载因子增加
+                this.count++; 
+                return true;
+            }
         }
+
+        let hashTable = new HashTable();
+        hashTable.put('name', 'zzy');
+        hashTable.put('age', 18);
+        console.log(hashTable.storage);
     </script>
 </body>
 
