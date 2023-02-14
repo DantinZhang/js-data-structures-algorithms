@@ -53,18 +53,38 @@
                 }
                 //3.如果已经有了桶，那么就遍历看是否已经添加
                 for (let i = 0; i < bucket.length; i++) {
-                    let tuple = bucket[i];
-                    if (tuple[0] == key) {
+                    // let tuple = bucket[i]; 不写这行也没事
+                    if (bucket[i][0] == key) {
                         //3.1如果添加了，就修改value
-                        tuple[1] = value;
+                        bucket[i][1] = value;
                         return true;
                     }
                 }
                 //4.循环结束如果没有返回，那么就要新增
                 bucket.push([key, value]);
                 //5.装载因子增加
-                this.count++; 
+                this.count++;
                 return true;
+            }
+
+            //获取某个key对应的value
+            get(key) {
+                //1.先找到位置
+                let index = this.hashFun(key, this.limit);
+                //2.找到该位置的桶
+                let bucket = this.storage[index];
+                //3.判断桶是否为空，为空说明肯定没有key
+                if(bucket == undefined) return null;
+                //4.如果不为空，那么就遍历桶
+                for(let i = 0; i < bucket.length; i++) {
+                    let tuple = bucket[i]; //存储每一轮的元组
+                    //5.如果找到key，就返回它对应的value
+                    if(tuple[0] == key) {
+                        return tuple[1];
+                    }
+                }
+                //6.如果遍历完没有return，说明没找到
+                return null;
             }
         }
 
@@ -72,6 +92,8 @@
         hashTable.put('name', 'zzy');
         hashTable.put('age', 18);
         console.log(hashTable.storage);
+        console.log(hashTable.get('age')); //18
+        console.log(hashTable.get('www')); //null
     </script>
 </body>
 
