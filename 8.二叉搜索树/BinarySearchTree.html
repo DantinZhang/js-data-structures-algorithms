@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>封装二叉搜索树</title>
 </head>
+
 <body>
     <script>
         //二叉树节点类
@@ -18,11 +20,48 @@
         }
 
         //封装一个二叉搜索树
-        class BinarySearchTree{
+        class BinarySearchTree {
             constructor() {
                 this.root = null;
+            }
+
+            //插入数据
+            insert(key) {
+                //1.先生成新的节点
+                let newNode = new Node(key);
+                //2.判断有没有根节点
+                if(this.root == null) {
+                    //2.1如果没有根节点，那么当前插入的就是根节点
+                    this.root = newNode;
+                }else {
+                    //2.2如果有根节点，就调用递归函数
+                    this.insertRecursion(this.root, newNode);
+                }
+            }
+
+            //插入操作的递归函数（依次向下查找）
+            insertRecursion(current, newNode) {
+                //1.看一下要往哪边查找
+                if(newNode.key < current.key){
+                    //2.1向左查找
+                    if(current.left == null) {
+                        //3.1如果左节点为空，那么就直接插入
+                        current.left = newNode;
+                    }else {
+                        //3.2如果左节点不为空，就递归调用，直到一直到叶子节点
+                        this.insertRecursion(current.left, newNode);
+                    }
+                } else {
+                    //2.2向右查找，同理
+                    if(current.right == null) {
+                        current.right = newNode;
+                    } else {
+                        this.insertRecursion(current.right, newNode);
+                    }
+                }
             }
         }
     </script>
 </body>
+
 </html>
