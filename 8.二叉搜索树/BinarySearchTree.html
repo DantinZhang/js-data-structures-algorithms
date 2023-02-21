@@ -77,27 +77,32 @@
             //3.1中序遍历的递归函数
             inOrderRecursion(node) {
                 if(node == null) return false;
-                this.preOrderRecursion(node.left);
+                this.inOrderRecursion(node.left);
                 console.log(node.key);
                 //递归完成后调用的是上一个栈顶函数的下一个过程，所以来到了node.right
-                this.preOrderRecursion(node.right);
+                this.inOrderRecursion(node.right);
             }
             //3.2中序遍历
             inOrderTraversal() {
-                this.preOrderRecursion(this.root);
+                this.inOrderRecursion(this.root);
             }
 
             //3.1后序遍历的递归函数
             afterOrderRecursion(node) {
                 if(node == null) return false;
-                this.preOrderRecursion(node.left);
+                this.afterOrderRecursion(node.left);
                 //递归完成后调用的是上一个栈顶函数的下一个过程，所以来到了node.right
-                this.preOrderRecursion(node.right);
+                this.afterOrderRecursion(node.right);
                 console.log(node.key);
             }
             //3.2后序遍历
-            afterOrderRecursion(node) {
+            afterOrderTraversal(node) {
                 this.afterOrderRecursion(this.root);
+            }
+
+            //4.寻找最小值
+            min() {
+
             }
         }
 
@@ -110,7 +115,12 @@
         bst.insert(9);
         console.log(bst);
         bst.preOrderTraversal();
+        console.log('-----------------------------')
+        bst.inOrderTraversal();
+        console.log('-----------------------------')
+        bst.afterOrderTraversal();
 
+        console.log('-----------------------------')
         //先搞清楚递归和函数调用栈
         function f(n) {
             console.log(n+' 入栈');
