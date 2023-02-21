@@ -73,6 +73,19 @@
             preOrderTraversal() {
                 this.preOrderRecursion(this.root);
             }
+
+            //3.1中序遍历的递归函数
+            inOrderRecursion(node) {
+                if(node == null) return false;
+                this.preOrderRecursion(node.left);
+                console.log(node.key+'入栈');
+                //递归完成后调用的是上一个栈顶函数的下一个过程，所以来到了node.right
+                this.preOrderRecursion(node.right);
+            }
+            //3.2中序遍历
+            inOrderTraversal() {
+                this.preOrderRecursion(this.root);
+            }
         }
 
         //测试代码
