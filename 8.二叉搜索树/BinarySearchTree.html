@@ -138,7 +138,7 @@
 
             //7.删除某个节点（难点）
             remove(key) {
-                //1.寻找要删除的节点
+                //一.寻找要删除的节点
                 //1.1定义变量保存父节点和左右子树的标识
                 let current = this.root;
                 let parent = null; //定义节点的父节点
@@ -158,7 +158,7 @@
                 //1.3如果找到最后还是没有，那么就无法删除
                 if(current == null) return false;
 
-                //2.已经找到，根据不同的情况进行删除
+                //二.已经找到current，根据不同的情况进行删除
                 //(1)情况一：删除的节点没有子节点
                 if(current.left == null && current.right == null) {
                     //1.如果是根节点
@@ -175,6 +175,26 @@
                     }
                 }
                 //(2)情况二：删除的节点只有一个子节点
+                //1.如果删除的节点只有左子节点
+                else if(current.right == null) {
+                    if(isLeftChild) {
+                        //如果删除的节点是父节点的左子节点
+                        parent.left = current.left;
+                    } else {
+                        //如果删除的节点是父节点的右子节点
+                        parent.right = current.left;
+                    }
+                }
+                //2.如果删除的节点只有右子节点
+                else if(current.left == null) {
+                    if(isLeftChild) {
+                        //如果删除的节点是父节点的左子节点
+                        parent.left = current.right;
+                    } else {
+                        //如果删除的节点是父节点的右子节点
+                        parent.right = current.right;
+                    }
+                }
             }
         }
 
