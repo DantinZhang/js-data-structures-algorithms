@@ -25,7 +25,7 @@
                 this.root = null;
             }
 
-            //插入数据
+            //1.1插入数据
             insert(key) {
                 //1.先生成新的节点
                 let newNode = new Node(key);
@@ -39,7 +39,7 @@
                 }
             }
 
-            //插入操作的递归函数（依次向下查找）
+            //1.2插入操作的递归函数（依次向下查找）
             insertRecursion(current, newNode) {
                 //1.看一下要往哪边查找
                 if(newNode.key < current.key){
@@ -60,6 +60,19 @@
                     }
                 }
             }
+
+            //2.1前序遍历的递归函数
+            preOrderRecursion(node) {
+                if(node == null) return false;
+                console.log(node.key+'入栈');
+                this.preOrderRecursion(node.left);
+                //递归完成后调用的是上一个栈顶函数的下一个过程，所以来到了node.right
+                this.preOrderRecursion(node.right);
+            }
+            //2.2前序遍历
+            preOrderTraversal() {
+                this.preOrderRecursion(this.root);
+            }
         }
 
         //测试代码
@@ -70,6 +83,16 @@
         bst.insert(5);
         bst.insert(9);
         console.log(bst);
+        bst.preOrderTraversal();
+
+        //先搞清楚递归和函数调用栈
+        function f(n) {
+            console.log(n+' 入栈');
+            if(n==0) return 0;
+            f(n-1);
+            console.log(n+' 出栈');
+        }
+        f(3);
     </script>
 </body>
 
