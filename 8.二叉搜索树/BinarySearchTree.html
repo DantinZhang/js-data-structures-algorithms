@@ -159,6 +159,22 @@
                 if(current == null) return false;
 
                 //2.已经找到，根据不同的情况进行删除
+                //(1)情况一：删除的节点没有子节点
+                if(current.left == null && current.right == null) {
+                    //1.如果是根节点
+                    if(current == this.root) {
+                        this.root = null;
+                    }
+                    //2.如果不是根节点
+                    else if(isLeftChild) {
+                        //2.1如果是左子树
+                        parent.left = null;
+                    } else {
+                        //2.2如果是右子树
+                        parent.right = null;
+                    }
+                }
+                //(2)情况二：删除的节点只有一个子节点
             }
         }
 
