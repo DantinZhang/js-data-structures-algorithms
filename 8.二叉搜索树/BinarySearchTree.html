@@ -202,6 +202,27 @@
                         parent.right = current.right;
                     }
                 }
+
+                //(3)情况三：删除的节点有两个子节点（复杂）
+                else {
+                    //1.找到后继节点
+                    //2.处理删除节点的上面（父）节点的指针指向
+                }
+            }
+
+            //7.1找到情况三的后继节点（右子树最小值）
+            getSuccessor(delNode) {
+                //这个函数主要处理的是删除节点下面的节点
+                let successor = delNode;
+                let current = delNode.right;//从右子节点开始查找
+
+                while(current != null) {
+                    successor = current;
+                    current = current.left;
+                }
+
+                //循环结束，说明找到了右子树的最小值所在节点
+                return successor;
             }
         }
 
