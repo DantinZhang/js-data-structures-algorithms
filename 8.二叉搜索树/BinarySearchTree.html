@@ -102,7 +102,20 @@
 
             //4.寻找最小值
             min() {
+                let current = this.root; 
+                while(current != null && current.left != null) {
+                    current = current.left;
+                }
+                if(current != null) return current.key;
+            }
 
+            //4.寻找最大值
+            max() {
+                let current = this.root; 
+                while(current != null && current.right != null) {
+                    current = current.right;
+                }
+                if(current != null) return current.key;
             }
         }
 
@@ -113,6 +126,10 @@
         bst.insert(15);
         bst.insert(5);
         bst.insert(9);
+        //测试最小值
+        console.log(bst.min());
+        //测试最大值
+        console.log(bst.max());
         console.log(bst);
         bst.preOrderTraversal();
         console.log('-----------------------------')
