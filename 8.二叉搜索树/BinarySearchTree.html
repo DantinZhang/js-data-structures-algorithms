@@ -177,7 +177,11 @@
                 //(2)情况二：删除的节点只有一个子节点
                 //1.如果删除的节点只有左子节点
                 else if(current.right == null) {
-                    if(isLeftChild) {
+                    //别忘了，如果只有一个根节点带一个子节点呢？
+                    if(current == this.root) {
+                        this.root = current.left;
+                    }
+                    else if(isLeftChild) {
                         //如果删除的节点是父节点的左子节点
                         parent.left = current.left;
                     } else {
@@ -187,7 +191,10 @@
                 }
                 //2.如果删除的节点只有右子节点
                 else if(current.left == null) {
-                    if(isLeftChild) {
+                    if(current == this.root) {
+                        this.root = current.right;
+                    }
+                    else if(isLeftChild) {
                         //如果删除的节点是父节点的左子节点
                         parent.left = current.right;
                     } else {
