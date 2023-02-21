@@ -135,6 +135,31 @@
                 }
                 return false;
             }
+
+            //7.删除某个节点（难点）
+            remove(key) {
+                //1.寻找要删除的节点
+                //1.1定义变量保存父节点和左右子树的标识
+                let current = this.root;
+                let parent = null; //定义节点的父节点
+                let isLeftChild = true; //左右子树的标识
+                if(current == null) return false;//根节点为空直接return
+                //1.2寻找删除的节点
+                while(current.key != key) {
+                    parent = current;
+                    if(key < current.key) {
+                        current = current.left;
+                        isLeftChild = true;
+                    } else {
+                        current = current.right;
+                        isLeftChild = false;
+                    } 
+                }
+                //1.3如果找到最后还是没有，那么就无法删除
+                if(current == null) return false;
+
+                //2.已经找到，根据不同的情况进行删除
+            }
         }
 
         //测试代码
