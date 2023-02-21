@@ -109,13 +109,31 @@
                 if(current != null) return current.key;
             }
 
-            //4.寻找最大值
+            //5.寻找最大值
             max() {
                 let current = this.root; 
                 while(current != null && current.right != null) {
                     current = current.right;
                 }
                 if(current != null) return current.key;
+            }
+
+            //6.寻找特定值(有返回true，没有返回false)
+            search(key) {
+                let current = this.root;
+                //二分查找原则
+                while(current != null) {
+                    if(key < current.key) {
+                        //向左查找
+                        current = current.left;
+                    }else if(key > current.key) {
+                        //向右查找
+                        current = current.right;
+                    }else {
+                        return true;
+                    }
+                }
+                return false;
             }
         }
 
