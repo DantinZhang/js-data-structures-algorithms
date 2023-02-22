@@ -206,7 +206,17 @@
                 //(3)情况三：删除的节点有两个子节点（复杂）
                 else {
                     //1.找到后继节点
+                    let successor = this.getSuccessor(current);
                     //2.处理删除节点的上面（父）节点的指针指向
+                    if(current == this.root) {
+                        this.root = successor;
+                    }else if(isLeftChild) {
+                        parent.left = successor;
+                    }else {
+                        parent.right = successor;
+                    }
+                    //3.将后继的左子节点改为删除的左子节点
+                    successor.left = current.left;
                 }
             }
 
@@ -215,13 +225,21 @@
                 //这个函数主要处理的是删除节点下面的节点
                 let successor = delNode;
                 let current = delNode.right;//从右子节点开始查找
-
+                let successorParent = delNode;
                 while(current != null) {
-                    successor = current;
-                    current = current.left;
+                    successorParent = successor; //保存后继节点的父节点(原地不动)
+                    successor = current; //保存后继节点（向下挪一步）
+                    current = current.left; //保存遍历的指针（向左挪一步）
                 }
 
                 //循环结束，说明找到了右子树的最小值所在节点
+                //此时还要进行判断:
+                //1.如果后继节点是第一个右子节点,那么指针的更改去另一个函数中完成
+                //2.如果不是，那么就要改前后节点的指向，这块儿真tm绕
+                if(successor != delNode.right) {
+                    successorParent.left = successor.right; //后继节点只可能有右子节点
+                    successor.right = delNode.right;
+                }
                 return successor;
             }
         }
