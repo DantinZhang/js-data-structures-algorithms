@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>图结构的封装</title>
 </head>
+
 <body>
     <script>
+        //封装一个图结构，其中要设置两个属性
+        //vertexes存储顶点有哪些
+        //edges存储的是顶点和边集合的键值对
         class Graph {
             constructor() {
                 this.vertexes = []; //存储顶点
-                this.edges = new Map(); //存储边
+                this.edges = new Map(); //存储顶点和边的对应关系
+            }
+
+            //添加顶点
+            addVertex(v) {
+                this.vertexes.push(v);
+                //添加顶点的同时要初始化存储顶点对应边的数据结构
+                this.edges.set(v, []); //这里使用数组存储边
             }
         }
 
@@ -26,10 +38,17 @@
             //向字典添加一个新的项
             set(key, value) {
                 //先判断有没有这个属性，有的话就不添加
-                if(this.has(key)) return false;
+                if (this.has(key)) return false;
                 //使用[]的方式添加属性，这样属性名就和value一样
                 this.items[key] = value;
                 return true;
+            }
+
+            //取字典中某个键对应的值
+            get(key) {
+                //先判断有没有这个属性，没有的话就false
+                if (!this.has(key)) return false;
+                return this.items[key];
             }
 
             //检测字典(对象)中是否有这个属性
@@ -39,7 +58,7 @@
 
             //删除某个元素
             remove(key) {
-                if(!this.has(key)) return false;
+                if (!this.has(key)) return false;
                 delete this.items[key];
             }
 
@@ -60,4 +79,5 @@
         }
     </script>
 </body>
+
 </html>
