@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图结构的封装</title>
+</head>
+<body>
+    <script>
+        class Graph {
+            constructor() {
+                this.vertexes = []; //存储顶点
+                this.edges = new Map(); //存储边
+            }
+        }
+
+        //封装一个字典，用来存储边(其实直接用ES6自带的Map就行)
+        //如果js执行上下文中自己封装了Map，优先调用的是自己的
+        class Map {
+            constructor() {
+                //字典使用对象存储，因为元素不能重复（对象中属性不能重复）
+                this.items = {};
+            }
+
+            //向字典添加一个新的项
+            set(key, value) {
+                //先判断有没有这个属性，有的话就不添加
+                if(this.has(key)) return false;
+                //使用[]的方式添加属性，这样属性名就和value一样
+                this.items[key] = value;
+                return true;
+            }
+
+            //检测字典(对象)中是否有这个属性
+            has(key) {
+                return this.items.hasOwnProperty(key);
+            }
+
+            //删除某个元素
+            remove(key) {
+                if(!this.has(key)) return false;
+                delete this.items[key];
+            }
+
+            //移除字典中所有项
+            clear() {
+                this.items = {};
+            }
+
+            //返回字典的长度
+            size() {
+                return Object.keys(this.items).length;
+            }
+
+            //获取字典中所有的值
+            getValues() {
+                return Object.values(this.items);
+            }
+        }
+    </script>
+</body>
+</html>
