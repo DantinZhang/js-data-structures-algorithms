@@ -98,6 +98,18 @@
                 }           
                 return result;     
             }
+
+            //用颜色作为是否已访问节点的标识
+            //white:未访问, grey:部分访问, black:完全访问
+            //初始化节点颜色的代码
+            initializeColor() {
+                let colors = [];
+                for(let i = 0; i < this.vertex.length; i++) {
+                    //全部初始化为白色（未访问）
+                    colors[this.vertex[i]] = 'white';
+                }
+                return colors;
+            }
         }
 
         //测试代码
@@ -122,7 +134,6 @@
 
         //4.输出结果
         console.log(graph.toString());
-        
     </script>
 </body>
 
