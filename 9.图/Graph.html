@@ -10,29 +10,6 @@
 
 <body>
     <script>
-        //封装一个图结构，其中要设置两个属性
-        //vertexes存储顶点有哪些
-        //edges存储的是顶点和边集合的键值对
-        class Graph {
-            constructor() {
-                this.vertexes = []; //存储顶点
-                this.edges = new Map(); //存储顶点和边的对应关系
-            }
-
-            //添加顶点
-            addVertex(v) {
-                this.vertexes.push(v);
-                //添加顶点的同时要初始化存储顶点对应边的数据结构
-                this.edges.set(v, []); //这里使用数组存储边
-            }
-
-            //添加边(无向边，需要互相指一下)
-            addEdge(v1, v2) {
-                this.edges.get(v1).push(v2);
-                this.edges.get(v2).push(v1);
-            }
-        }
-
         //封装一个字典，用来存储边(其实直接用ES6自带的Map就行)
         //如果js执行上下文中自己封装了Map，优先调用的是自己的
         class Map {
@@ -83,6 +60,69 @@
                 return Object.values(this.items);
             }
         }
+        
+        //封装一个图结构，其中要设置两个属性
+        //vertexes存储顶点有哪些
+        //edges存储的是顶点和边集合的键值对
+        class Graph {
+            constructor() {
+                this.vertexes = []; //存储顶点
+                this.edges = new Map(); //存储顶点和边的对应关系
+            }
+
+            //添加顶点
+            addVertex(v) {
+                this.vertexes.push(v);
+                //添加顶点的同时要初始化存储顶点对应边的数据结构
+                this.edges.set(v, []); //这里使用数组存储边
+            }
+
+            //添加边(无向边，需要互相指一下)
+            addEdge(v1, v2) {
+                this.edges.get(v1).push(v2);
+                this.edges.get(v2).push(v1);
+            }
+
+            //转字符串
+            toString() {
+                let result = '';
+                for(let i = 0; i < this.vertexes.length; i++) {
+                    let vertex = this.vertexes[i];
+                    result += vertex + ' => ';
+                    let vLinks = this.edges.get(vertex);//拿到连接的顶点们
+                    for(let i = 0; i < vLinks.length; i++) {
+                        let edge = vLinks[i];
+                        result += edge + ' ';
+                    }
+                    result += '\n';
+                }           
+                return result;     
+            }
+        }
+
+        //测试代码
+        let graph = new Graph();
+        let myVertexes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+        //这里最好循环添加，因为我们除了添加顶点之外，还要初始化顶点对应的边数组
+        for(let i = 0; i < myVertexes.length; i++) {
+            graph.addVertex(myVertexes[i]);
+        }
+
+        //3.添加边
+        graph.addEdge('A', 'B')
+        graph.addEdge('A', 'C')
+        graph.addEdge('A', 'D')
+        graph.addEdge('C', 'D')
+        graph.addEdge('C', 'G')
+        graph.addEdge('D', 'G')
+        graph.addEdge('D', 'H')
+        graph.addEdge('B', 'E')
+        graph.addEdge('B', 'F')
+        graph.addEdge('E', 'I')
+
+        //4.输出结果
+        console.log(graph.toString());
+        
     </script>
 </body>
 
