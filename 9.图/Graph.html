@@ -25,6 +25,12 @@
                 //添加顶点的同时要初始化存储顶点对应边的数据结构
                 this.edges.set(v, []); //这里使用数组存储边
             }
+
+            //添加边(无向边，需要互相指一下)
+            addEdge(v1, v2) {
+                this.edges.get(v1).push(v2);
+                this.edges.get(v2).push(v1);
+            }
         }
 
         //封装一个字典，用来存储边(其实直接用ES6自带的Map就行)
