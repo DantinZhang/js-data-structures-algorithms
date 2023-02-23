@@ -147,9 +147,9 @@
 
             //递归函数
             dfsRecursion(initV, colors) {
-                console.log(initV);
-                colors[initV] = 'black';
-                let vLinks = this.edges.get(initV);
+                console.log(initV); //访问并输出
+                colors[initV] = 'black'; //遍历完改为黑色
+                let vLinks = this.edges.get(initV); //拿到邻居
                 for (let i = 0; i < vLinks.length; i++) {
                     if (colors[vLinks[i]] == 'white') {
                         this.dfsRecursion(vLinks[i],colors);
