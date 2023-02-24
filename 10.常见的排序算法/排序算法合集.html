@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见的排序算法</title>
+</head>
+<body>
+    <script>
+        class ArrayList {
+            constructor() {
+                this.arr = []
+            }
+
+            insert(element) {
+                return this.arr.push(element);
+            }
+
+            toString() {
+                return this.arr.join(' ');
+            }
+
+        }
+
+        let list = new ArrayList();
+        list.insert(13);
+        list.insert(99);
+        list.insert(45);
+        list.insert(1);
+        list.insert(15);
+        list.insert(7);
+        list.insert(9);
+        console.log(list.toString());
+    </script>
+</body>
+</html>
