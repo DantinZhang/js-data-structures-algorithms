@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>常见的排序算法</title>
 </head>
+
 <body>
     <script>
         class ArrayList {
@@ -21,17 +23,30 @@
                 return this.arr.join(' ');
             }
 
+            //1.冒泡排序
+            bubbleSort() {
+                for (var j = this.arr.length - 1; j > 0; j--) {
+                    for (var i = 0; i < j; i++) {
+                        if (this.arr[i] > this.arr[i + 1]) {
+                            let zzy = this.arr[i + 1];
+                            this.arr[i + 1] = this.arr[i];
+                            this.arr[i] = zzy;
+                        }
+                    }
+                }
+                return this.arr
+            }
         }
 
         let list = new ArrayList();
-        list.insert(13);
-        list.insert(99);
-        list.insert(45);
+        list.insert(4);
+        list.insert(5);
+        list.insert(2);
         list.insert(1);
-        list.insert(15);
-        list.insert(7);
-        list.insert(9);
+        list.insert(3);
         console.log(list.toString());
+        console.log(list.bubbleSort());
     </script>
 </body>
+
 </html>
