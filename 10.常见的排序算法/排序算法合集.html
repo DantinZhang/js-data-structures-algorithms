@@ -25,8 +25,8 @@
 
             //1.冒泡排序
             bubbleSort() {
-                for (var j = this.arr.length - 1; j > 0; j--) {
-                    for (var i = 0; i < j; i++) {
+                for (let j = this.arr.length - 1; j > 0; j--) {
+                    for (let i = 0; i < j; i++) {
                         if (this.arr[i] > this.arr[i + 1]) {
                             let zzy = this.arr[i + 1];
                             this.arr[i + 1] = this.arr[i];
@@ -39,9 +39,9 @@
 
             //2.选择排序
             selectionSort() {
-                for (var j = 0; j < this.arr.length - 1; j++) {
+                for (let j = 0; j < this.arr.length - 1; j++) {
                     let minIndex = j;
-                    for (var i = minIndex + 1; i < this.arr.length; i++) {
+                    for (let i = minIndex + 1; i < this.arr.length; i++) {
                         if (this.arr[i] < this.arr[minIndex]) {
                             minIndex = i;
                         }
