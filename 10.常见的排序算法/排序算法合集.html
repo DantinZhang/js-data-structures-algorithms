@@ -39,7 +39,9 @@
 
             //2.选择排序
             selectionSort() {
+                //外层循环控制走几趟，每一趟开始的位置+1
                 for (let j = 0; j < this.arr.length - 1; j++) {
+                    //内层循环依次向后比较
                     let minIndex = j;
                     for (let i = minIndex + 1; i < this.arr.length; i++) {
                         if (this.arr[i] < this.arr[minIndex]) {
