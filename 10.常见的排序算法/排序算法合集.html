@@ -36,6 +36,23 @@
                 }
                 return this.arr
             }
+
+            //2.选择排序
+            selectionSort() {
+                for (var j = 0; j < this.arr.length - 1; j++) {
+                    let minIndex = j;
+                    for (var i = minIndex + 1; i < this.arr.length; i++) {
+                        if (this.arr[i] < this.arr[minIndex]) {
+                            minIndex = i;
+                        }
+                    }
+                    //交换两个位置元素
+                    let temp = this.arr[minIndex];
+                    this.arr[minIndex] = this.arr[j];
+                    this.arr[j] = temp;
+                }
+                return this.arr;
+            }
         }
 
         let list = new ArrayList();
@@ -46,6 +63,7 @@
         list.insert(3);
         console.log(list.toString());
         console.log(list.bubbleSort());
+        console.log(list.selectionSort());
     </script>
 </body>
 
