@@ -55,6 +55,26 @@
                 }
                 return this.arr;
             }
+
+            //3.插入排序
+            insertionSort() {
+                //外层循环，从第一个位置开始获取数据。
+                for (let j = 1; j < this.arr.length; j++) {
+                    //内层循环，从当前位置依次向前比较
+                    for (let i = j - 1; i >= 0; i--) {
+                        if (this.arr[i] > this.arr[j]) {
+                            //交换位置
+                            let temp = this.arr[j]; //保存当前数据
+                            this.arr[j] = this.arr[i];
+                            this.arr[i] = temp;
+                            j--; //j往前挪
+                        } else {
+                            break; //如果比前边的数大，就退出循环
+                        }
+                    }
+                }
+                return this.arr;
+            }
         }
 
         let list = new ArrayList();
@@ -66,6 +86,7 @@
         console.log(list.toString());
         console.log(list.bubbleSort());
         console.log(list.selectionSort());
+        console.log(list.insertionSort());
     </script>
 </body>
 
